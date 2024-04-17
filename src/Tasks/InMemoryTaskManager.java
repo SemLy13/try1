@@ -2,7 +2,6 @@ package Tasks;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.LinkedList;
 
 public class InMemoryTaskManager implements TaskManager {
     public HashMap<String, Task> DefaultTasks;
