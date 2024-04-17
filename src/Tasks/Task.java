@@ -26,5 +26,8 @@ public class Task {
         return UUID.randomUUID().toString();
     }
 
-
+    // class manager -> interface manager
+    // новый класс InMemoryTaskManager, перенести туда всё из Manager +
+    // class InMemoryTaskManager implements TaskManager (@Override)
+    // новая фича: метод .history() , если вызывается метод GetTask,Epic,Subtask
 }
