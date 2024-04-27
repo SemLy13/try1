@@ -9,8 +9,8 @@ public class InMemoryHistoryManager implements HistoryManager{
     private Node last;
     private HashMap<String, Node> taskMap;
     ArrayList<Task> tasks;
-    private static LinkedList<Task> List;
-    private final int MAX_SIZE = 10;
+    //private static LinkedList<Task> List;
+    //private final int MAX_SIZE = 10;
     public InMemoryHistoryManager() {
         //List = new LinkedList<>();
         taskMap = new HashMap<>();
@@ -36,15 +36,15 @@ public void linkLast(Task task) {
     taskMap.put(task.id, newNode);
 }
 
-    public ArrayList<Task> getTasks() {
-        //ArrayList<Task> tasks = new ArrayList<>();
-        Node current = first;
-        while (current != null) {
-            tasks.add(current.task);
-            current = current.next;
-        }
-        return tasks;
-    }
+//    public ArrayList<Task> getTasks() {
+//        //ArrayList<Task> tasks = new ArrayList<>();
+//        Node current = first;
+//        while (current != null) {
+//            tasks.add(current.task);
+//            current = current.next;
+//        }
+//        return tasks;
+//    }
 
     public void removeNode(Node node) {
         if (node.prev != null) {
@@ -97,11 +97,11 @@ public void linkLast(Task task) {
         PrintAll(tasks);
     }
 
-    public void PrintAll(LinkedList<Task> l) {
-        for (Task task : l) {
-            System.out.println(task.name);
-        }
-    }
+//    public void PrintAll(LinkedList<Task> l) {
+//        for (Task task : l) {
+//            System.out.println(task.name);
+//        }
+//    }
     public void PrintAll(ArrayList<Task> a){
         for (Task task : a) {
             System.out.println(task.name + ": " + task.id);

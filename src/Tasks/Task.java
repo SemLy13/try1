@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public class Task {
     public String name,description,id;
-    public Status status = Status.NEW;
+    public Status status;
     public enum Status {
         NEW,
         IN_PROGRESS,
