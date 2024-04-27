@@ -14,6 +14,7 @@ public class Task {
         this.name = name;
         this.description = description;
         id = ID();
+        status = Status.NEW;
     }
     public Task(String name, String description, Status status){
         this.name = name;
@@ -25,9 +26,4 @@ public class Task {
         //String uniqueID = UUID.randomUUID().toString();
         return UUID.randomUUID().toString();
     }
-
-    // class manager -> interface manager
-    // новый класс InMemoryTaskManager, перенести туда всё из Manager +
-    // class InMemoryTaskManager implements TaskManager (@Override)
-    // новая фича: метод .history() , если вызывается метод GetTask,Epic,Subtask
 }

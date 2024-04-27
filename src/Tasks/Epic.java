@@ -4,15 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Epic extends Task {
-    public String id;
-    public Status status;
+    //public String id;
+   // public Status status;
     public HashMap<String, Subtask> SubTasksForEpic;
-    // перенести сюда sub.id + sub
     public Epic(String name, String description) {
         super(name, description);
         SubTasksForEpic = new HashMap<>();
-        id = Task.ID();
-        status = Status.NEW;
     }
     public void PrintSub(){
         System.out.println(SubTasksForEpic);

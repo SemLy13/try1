@@ -4,5 +4,6 @@ import java.util.LinkedList;
 
 interface HistoryManager {
     void add(Task task);
-    LinkedList<Task> getHistory();
+    void remove(String id);
+    void getHistory();
 }
