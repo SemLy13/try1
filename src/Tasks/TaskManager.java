@@ -2,9 +2,9 @@ package Tasks;
 
 interface TaskManager {
 
-    void addTask(String id, Task task);
-    void addEpic(String id, Epic epic);
-    void addSubTask(String id, Subtask subtask);
+    void addTask(Task task);
+    void addEpic(Epic epic);
+    void addSubTask(Subtask subtask);
     void UpdateTask(String id, Task task);
     void UpdateSubtask(String id, Subtask subtask);
     void PrintAll();

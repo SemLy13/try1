@@ -60,6 +60,7 @@ public void linkLast(Task task) {
         taskMap.remove(node.task.id);
     }
 
+
     public void add(Task task) {
         if (taskMap.containsKey(task.id)) {
             Node existingNode = taskMap.get(task.id);
@@ -86,8 +87,6 @@ public void linkLast(Task task) {
         }
     }
 
-
-
     @Override
     public void getHistory() {
         tasks.clear(); // Очищаем список перед заполнением
@@ -95,6 +94,13 @@ public void linkLast(Task task) {
             tasks.add(node.task);
         }
         PrintAll(tasks);
+    }
+    public ArrayList<Task> getHistoryForBack() {
+        tasks.clear(); // Очищаем список перед заполнением
+        for (Node node : taskMap.values()) {
+            tasks.add(node.task);
+        }
+        return tasks;
     }
 
 //    public void PrintAll(LinkedList<Task> l) {

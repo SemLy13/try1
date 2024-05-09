@@ -7,7 +7,7 @@ public class InMemoryTaskManager implements TaskManager {
     public HashMap<String, Task> DefaultTasks;
     public HashMap<String, Epic> EpicTasks;
     public HashMap<String, Subtask> SubTasks;
-    private InMemoryHistoryManager imhm;
+    public InMemoryHistoryManager imhm;
     public InMemoryTaskManager(InMemoryHistoryManager imhm){
         DefaultTasks  = new HashMap<>();
         EpicTasks  = new HashMap<>();
@@ -15,17 +15,17 @@ public class InMemoryTaskManager implements TaskManager {
         this.imhm = imhm;
     }
     @Override
-    public void addTask(String id, Task task){
-        DefaultTasks.put(id, task);
+    public void addTask(Task task){
+        DefaultTasks.put(task.id, task);
     }
     @Override
-    public void addEpic(String id, Epic epic){
-        EpicTasks.put(id, epic);
+    public void addEpic(Epic epic){
+        EpicTasks.put(epic.id, epic);
     }
     @Override
-    public void addSubTask(String id, Subtask subtask){
-        SubTasks.put(id, subtask);
-        EpicTasks.get(subtask.EpicId).SubTasksForEpic.put(id, subtask);
+    public void addSubTask(Subtask subtask){
+        SubTasks.put(subtask.id, subtask);
+        EpicTasks.get(subtask.EpicId).SubTasksForEpic.put(subtask.id, subtask);
         EpicTasks.get(subtask.EpicId).CheckStatus();
     }
     @Override
@@ -66,7 +66,6 @@ public class InMemoryTaskManager implements TaskManager {
         System.out.println("ID: "+ DefaultTasks.get(id).id + "  NAME: " + DefaultTasks.get(id).name
                 + "  Task Description: " + DefaultTasks.get(id).description + "  Status: "
                 + DefaultTasks.get(id).status);
-        //InMemoryHistoryManager imht = new InMemoryHistoryManager();
         imhm.add(DefaultTasks.get(id));
 
     }
@@ -76,7 +75,6 @@ public class InMemoryTaskManager implements TaskManager {
         System.out.println("ID: "+ EpicTasks.get(id).id + "  NAME: " + EpicTasks.get(id).name
                 + "  Task Description: " + EpicTasks.get(id).description + "  Status: "
                 + EpicTasks.get(id).status);
-       // InMemoryHistoryManager imht = new InMemoryHistoryManager();
         imhm.add(EpicTasks.get(id));
     }
     @Override
@@ -86,7 +84,6 @@ public class InMemoryTaskManager implements TaskManager {
                 "  NAME: " + SubTasks.get(id).name +
                 "  Task Description: " + SubTasks.get(id).description + "  Status: " +
                 SubTasks.get(id).status);
-       // InMemoryHistoryManager imht = new InMemoryHistoryManager();
         imhm.add(SubTasks.get(id));
     }
     @Override

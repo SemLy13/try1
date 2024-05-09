@@ -1,9 +1,4 @@
-import Tasks.Task;
-import Tasks.Subtask;
-import Tasks.Epic;
-import Tasks.InMemoryTaskManager;
-import Tasks.InMemoryHistoryManager;
-import Tasks.Managers;
+import Tasks.*;
 
 
 public class Main {
@@ -75,47 +70,22 @@ public class Main {
         InMemoryTaskManager manager = new InMemoryTaskManager(imhm);
 
         Task task = new Task("Task 1", "Task description");
-        manager.addTask(task.id, task);
-//        InMemoryTaskManager.PrintAll();
-//        System.out.println("=============");
+        manager.addTask(task);
         Task task2 = new Task("Task 2", "Yes");
-        manager.addTask(task2.id, task2);
-//        InMemoryTaskManager.PrintAll();
-//        System.out.println("=============");
-//        Task task3 = new Task("Task 3", "dfgh", Task.Status.IN_PROGRESS);
-//        InMemoryTaskManager.UpdateTask(task.id, task3);
-//        InMemoryTaskManager.PrintAll();
-//        System.out.println("=============");
-
+        manager.addTask(task2);
         Epic epic = new Epic("epic 1", "Task description");
-        manager.addEpic(epic.id, epic);
-//        InMemoryTaskManager.PrintAll();
-//        System.out.println("=============");
+        manager.addEpic(epic);
         Subtask sub = new Subtask(epic.id, "Sub 1", "descr");
-        manager.addSubTask(sub.id, sub);
-//        InMemoryTaskManager.PrintAll();
-//        System.out.println("=============");
+        manager.addSubTask(sub);
         Subtask sub2 = new Subtask(epic.id, "Sub 2", "!!!!!!!", Subtask.Status.IN_PROGRESS);
-        manager.addSubTask(sub2.id, sub2);//UpdateSubtask
-//        InMemoryTaskManager.PrintAll();
-//        System.out.println("=============");
+        manager.addSubTask(sub2);
         Subtask sub3 = new Subtask(epic.id, "Sub 3", "descr");
-        manager.addSubTask(sub3.id, sub3);
-//        InMemoryTaskManager.PrintAll();
-//        System.out.println("=============");
-//        Subtask sub4 = new Subtask(epic.id, "Sub 4", "!!!!!!!", Subtask.Status.DONE);
-//        InMemoryTaskManager.UpdateSubtask(sub.id, sub4);
-//        Subtask sub5 = new Subtask(epic.id, "Sub 5", "!!!!!!!", Subtask.Status.IN_PROGRESS);
-//        InMemoryTaskManager.UpdateSubtask(sub2.id, sub5);
+        manager.addSubTask(sub3);
         Epic epic2 = new Epic("epic 2", "Task description");
-        manager.addEpic(epic2.id, epic2);
+        manager.addEpic(epic2);
         manager.PrintAll();
         System.out.println("=============");
-        //manager.MySubtasks(epic);
 
-
-////        InMemoryTaskManager.GetSubtask(sub5.id);
-////        InMemoryTaskManager.GetSubtask(sub4.id);
         manager.GetSubtask(sub3.id);
         manager.GetSubtask(sub2.id);
         manager.GetSubtask(sub.id);
