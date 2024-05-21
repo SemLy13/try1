@@ -1,10 +1,12 @@
 package Tasks;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Epic extends Task {
     public HashMap<String, Subtask> SubTasksForEpic;
+    public LocalDateTime endTime;
     public Epic(String name, String description) {
         super(name, description);
         SubTasksForEpic = new HashMap<>();
@@ -12,6 +14,21 @@ public class Epic extends Task {
     public Epic(String id,String name, String description, Status status) {
         super(id, name, description, status);
         SubTasksForEpic = new HashMap<>();
+    }
+    public Epic(String name, String description, long duration, LocalDateTime startTime){
+        super(name, description, duration, startTime);
+        SubTasksForEpic = new HashMap<>();
+    }
+    @Override
+    public LocalDateTime getEndTime() {
+        if (startTime != null) {
+            long totalDuration = 0;
+            for (Subtask subtask : SubTasksForEpic.values()) {
+                totalDuration += subtask.duration;
+            }
+            return startTime.plusMinutes(totalDuration);
+        }
+        return null;
     }
     public void PrintSub(){
         System.out.println(SubTasksForEpic);

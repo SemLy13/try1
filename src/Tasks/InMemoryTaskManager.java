@@ -1,7 +1,8 @@
 package Tasks;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class InMemoryTaskManager implements TaskManager {
     public HashMap<String, Task> DefaultTasks;
@@ -13,6 +14,26 @@ public class InMemoryTaskManager implements TaskManager {
         EpicTasks  = new HashMap<>();
         SubTasks  = new HashMap<>();
         this.imhm = imhm;
+    }
+    public List<Task> getPrioritizedTasks() {
+        List<Task> allTasks = new ArrayList<>();
+
+        // Собираем все задачи, эпики и подзадачи в один список
+        allTasks.addAll(DefaultTasks.values());
+        allTasks.addAll(EpicTasks.values());
+        allTasks.addAll(SubTasks.values());
+
+        // Сортируем задачи по startTime, если поле отсутствует, задача идет в конец списка
+        return allTasks.stream()
+                .sorted(Comparator.comparing((Task t) -> t.startTime != null ? t.startTime : LocalDateTime.MAX))
+                .collect(Collectors.toList());
+    }
+
+    public void printPrioritizedTasks() {
+        List<Task> prioritizedTasks = getPrioritizedTasks();
+        for (Task task : prioritizedTasks) {
+            System.out.println(task.name);
+        }
     }
     @Override
     public void addTask(Task task){
@@ -44,34 +65,37 @@ public class InMemoryTaskManager implements TaskManager {
         System.out.println("Type : Default Tasks");
         for (Map.Entry<String, Task> entry : DefaultTasks.entrySet()) {
             System.out.println("ID: "+ entry.getKey() + "  NAME: " + entry.getValue().name + "  Task Description: "
-                    + entry.getValue().description + "  Status: " + entry.getValue().status);
+                    + entry.getValue().description + "  Status: " + entry.getValue().status + " Duration: "
+                    + entry.getValue().duration + " StartTime: " + entry.getValue().startTime);
         }
         System.out.println();
         System.out.println("Type : Epic Tasks");
         for (Map.Entry<String, Epic> entry : EpicTasks.entrySet()) {
             System.out.println("ID: "+ entry.getKey() + "  NAME: " + entry.getValue().name + "  Task Description: "
-                    + entry.getValue().description + "  Status: " + entry.getValue().status);
+                    + entry.getValue().description + "  Status: " + entry.getValue().status + " Duration: "
+                    + entry.getValue().duration + " StartTime: " + entry.getValue().startTime);
         }
         System.out.println();
         System.out.println("Type : Sub Tasks");
         for (Map.Entry<String, Subtask> entry : SubTasks.entrySet()) {
-            System.out.println("ID: "+ entry.getKey() + " Epic ID "+ entry.getValue().EpicId+  "  NAME: " + entry.getValue().name + "  Task Description: "
-                    + entry.getValue().description + "  Status: " + entry.getValue().status);
+            System.out.println("ID: "+ entry.getKey() + " Epic ID "+ entry.getValue().EpicId+  "  NAME: "
+                    + entry.getValue().name + "  Task Description: " + entry.getValue().description + "  Status: "
+                    + entry.getValue().status + " Duration: " + entry.getValue().duration + " StartTime: "
+                    + entry.getValue().startTime);
         }
         System.out.println();
     }
     @Override
     public void GetTask(String id){
-        //DefaultTasks.get(id);
+//        DefaultTasks.get(id);
         System.out.println("ID: "+ DefaultTasks.get(id).id + "  NAME: " + DefaultTasks.get(id).name
                 + "  Task Description: " + DefaultTasks.get(id).description + "  Status: "
                 + DefaultTasks.get(id).status);
         imhm.add(DefaultTasks.get(id));
-
     }
     @Override
     public void GetEpic(String id){
-        //EpicTasks.get(id)
+        //EpicTasks.get(id);
         System.out.println("ID: "+ EpicTasks.get(id).id + "  NAME: " + EpicTasks.get(id).name
                 + "  Task Description: " + EpicTasks.get(id).description + "  Status: "
                 + EpicTasks.get(id).status);
@@ -119,5 +143,9 @@ public class InMemoryTaskManager implements TaskManager {
         DefaultTasks.clear();
         EpicTasks.clear();
         SubTasks.clear();
+    }
+    @Override
+    public Task getTask(String id){
+        return DefaultTasks.get(id);
     }
 }

@@ -1,6 +1,7 @@
 package Tasks;
 
 import java.util.UUID;
+import java.time.LocalDateTime;
 
 public class Task {
     public String name,description,id;
@@ -10,6 +11,8 @@ public class Task {
         IN_PROGRESS,
         DONE
     }
+    public long duration = 0; // продолжительность в минутах
+    public LocalDateTime startTime; // время начала
     public Task(String name, String description){
         this.name = name;
         this.description = description;
@@ -28,12 +31,21 @@ public class Task {
         this.id = id;
         this.status = status;
     }
+    public Task(String name, String description, long duration, LocalDateTime startTime){
+        this.name = name;
+        this.description = description;
+        id = ID();
+        status = Status.NEW;
+        this.duration = duration;
+        this.startTime = startTime;
+    }
     public static String ID(){
-        //String uniqueID = UUID.randomUUID().toString();
         return UUID.randomUUID().toString();
     }
-    @Override
-    public String toString() {
-    return id;
+    public LocalDateTime getEndTime() {
+        if (startTime != null) {
+            return startTime.plusMinutes(duration);
+        }
+        return null;
     }
 }

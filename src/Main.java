@@ -1,5 +1,5 @@
 import Tasks.*;
-
+import java.time.LocalDateTime;
 
 public class Main {
 
@@ -69,42 +69,48 @@ public class Main {
         InMemoryHistoryManager imhm = (InMemoryHistoryManager) Managers.getDefaultHistory();
         InMemoryTaskManager manager = new InMemoryTaskManager(imhm);
 
-        Task task = new Task("Task 1", "Task description");
+        //LocalDateTime startTime = LocalDateTime.now();
+        LocalDateTime startTime = LocalDateTime.of(2024, 1, 1, 12, 0);
+        Task task = new Task("Task 1", "No",120, startTime);
         manager.addTask(task);
-        Task task2 = new Task("Task 2", "Yes");
+        System.out.println(manager.DefaultTasks.get(task.id).getEndTime());
+        Task task2 = new Task("Task 2", "Yes",90, LocalDateTime.of(2024, 1, 1, 14, 0));
         manager.addTask(task2);
-        Epic epic = new Epic("epic 1", "Task description");
+        System.out.println(manager.DefaultTasks.get(task2.id).getEndTime());
+        Epic epic = new Epic("epic 1", "Task description",0, LocalDateTime.of(2024, 1, 1, 10, 0));
         manager.addEpic(epic);
-        Subtask sub = new Subtask(epic.id, "Sub 1", "descr");
+        Subtask sub = new Subtask(epic.id, "Sub 1", "descr",10, LocalDateTime.of(2024, 1, 1, 11, 30));
         manager.addSubTask(sub);
-        Subtask sub2 = new Subtask(epic.id, "Sub 2", "!!!!!!!", Subtask.Status.IN_PROGRESS);
+        Subtask sub2 = new Subtask(epic.id, "Sub 2", "!!!!!!!",2, startTime);
         manager.addSubTask(sub2);
-        Subtask sub3 = new Subtask(epic.id, "Sub 3", "descr");
+        Subtask sub3 = new Subtask(epic.id, "Sub 3", "descr",3, startTime);
         manager.addSubTask(sub3);
-        Epic epic2 = new Epic("epic 2", "Task description");
+        Epic epic2 = new Epic("epic 2", "Task description", 0 , LocalDateTime.of(2024, 1, 1, 11, 0));
         manager.addEpic(epic2);
+        System.out.println(manager.EpicTasks.get(epic.id).getEndTime());
+        System.out.println(manager.EpicTasks.get(epic2.id).getEndTime());
         manager.PrintAll();
         System.out.println("=============");
-
-        manager.GetSubtask(sub3.id);
-        manager.GetSubtask(sub2.id);
-        manager.GetSubtask(sub.id);
-        manager.GetEpic(epic.id);
-        manager.GetTask(task.id);
-        manager.GetEpic(epic2.id);
-        manager.GetTask(task2.id);
-        //InMemoryTaskManager.GetTask(task3.id);
-        manager.GetEpic(epic.id);
-        manager.GetTask(task.id);
-        manager.GetTask(task2.id);
-        manager.GetSubtask(sub3.id);
-        manager.GetSubtask(sub2.id);
-        manager.GetSubtask(sub.id);
-        manager.GetEpic(epic.id);
-        System.out.println("=============////");
-        imhm.getHistory();
-        imhm.remove(epic.id);
-        System.out.println("=============////");
-        imhm.getHistory();
+        manager.printPrioritizedTasks();
+//        manager.GetSubtask(sub3.id);
+//        manager.GetSubtask(sub2.id);
+//        manager.GetSubtask(sub.id);
+//        manager.GetEpic(epic.id);
+//        manager.GetTask(task.id);
+//        manager.GetEpic(epic2.id);
+//        manager.GetTask(task2.id);
+//        //InMemoryTaskManager.GetTask(task3.id);
+//        manager.GetEpic(epic.id);
+//        manager.GetTask(task.id);
+//        manager.GetTask(task2.id);
+//        manager.GetSubtask(sub3.id);
+//        manager.GetSubtask(sub2.id);
+//        manager.GetSubtask(sub.id);
+//        manager.GetEpic(epic.id);
+//        System.out.println("=============////");
+//        imhm.getHistory();
+//        imhm.remove(epic.id);
+//        System.out.println("=============////");
+//        imhm.getHistory();
     }
 }

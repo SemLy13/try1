@@ -19,4 +19,5 @@ interface TaskManager {
     void RemoveAllEpic();
     void RemoveAllSubtask();
     void RemoveAll();
+    Task getTask(String id);
 }
