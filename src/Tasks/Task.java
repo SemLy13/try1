@@ -2,6 +2,7 @@ package Tasks;
 
 import java.util.UUID;
 import java.time.LocalDateTime;
+import com.google.gson.Gson;
 
 public class Task {
     public String name,description,id;
@@ -10,6 +11,15 @@ public class Task {
         NEW,
         IN_PROGRESS,
         DONE
+    }
+    public static String toJson(Task task) {
+        Gson gson = new Gson();
+        return gson.toJson(task);
+    }
+
+    public static Task fromJson(String json) {
+        Gson gson = new Gson();
+        return gson.fromJson(json, Task.class);
     }
     public long duration = 0; // продолжительность в минутах
     public LocalDateTime startTime; // время начала

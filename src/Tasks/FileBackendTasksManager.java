@@ -187,7 +187,7 @@ public class FileBackendTasksManager extends InMemoryTaskManager{
         SubTasks.clear();
         save();
     }
-    public void save(){
+    protected void save(){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\SemLy\\Documents\\dev\\tasks1\\try1\\src\\Tasks\\data.csv"))) {
             writer.write("");
             for (Map.Entry<String, Task> entry : DefaultTasks.entrySet()) {
